@@ -3,9 +3,26 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-        <title>Blank App</title>
+        <link rel="stylesheet" type="text/css" href="css/vendors/font-awesome-4.6.3/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="css/styles.css" />
+        <title>BlankPage</title>
     </head>
     <body>
+        <div class="container">
+          <div class="content">
+            <div class="sub-content">
+              <img class="pos-center" src="images/profile_default.png" alt="Profile Default" width="50%">
+            </div>
+            <div class="sub-content text-center">
+              <a class="index-btn" href="#">NEW TO THE APP</a>
+              <a class="index-btn" href="#">EXPERIENCED</a>
+            </div>
+          </div>
+        </div>
         <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
     </body>
 </html>
