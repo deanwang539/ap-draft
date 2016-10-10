@@ -8,8 +8,8 @@ $(document).ready(function() {
       var accordion_active = $("#accordion").accordion("option", "active");
       console.log(accordion_active);
       if (accordion_active === 0) {
-        $(".tutorial-btn").hide();
+        $(".tutorial-btn").hide("fade", {}, 500, {});
       } else {
-        $(".tutorial-btn").show();
+        $(".tutorial-btn").show("fade", {}, 500, {});
       }});
 });

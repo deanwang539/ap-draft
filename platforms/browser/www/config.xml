@@ -9,4 +9,7 @@
     </author>
     <content src="index.html" />
     <access origin="*" />
+    <preference name="StatusBarOverlaysWebView" value="true" />
+    <preference name="StatusBarBackgroundColor" value="#192c49" />
+    <preference name="StatusBarStyle" value="lightcontent" />
 </widget>
