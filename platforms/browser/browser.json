@@ -4,10 +4,19 @@
         "uninstalled": []
     },
     "config_munge": {
-        "files": {}
+        "files": {
+            "config.xml": {
+                "parents": {
+                    "/*": []
+                }
+            }
+        }
     },
     "installed_plugins": {
         "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.phonegap.helloworld"
+        },
+        "com.phonegap.plugins.video": {
             "PACKAGE_NAME": "com.phonegap.helloworld"
         }
     },
@@ -26,9 +35,18 @@
             "id": "cordova-plugin-statusbar.StatusBarProxy",
             "pluginId": "cordova-plugin-statusbar",
             "runs": true
+        },
+        {
+            "file": "plugins/com.phonegap.plugins.video/3.0.0/www/video.js",
+            "id": "com.phonegap.plugins.video.VideoPlayer",
+            "pluginId": "com.phonegap.plugins.video",
+            "clobbers": [
+                "VideoPlayer"
+            ]
         }
     ],
     "plugin_metadata": {
-        "cordova-plugin-statusbar": "2.2.0"
+        "cordova-plugin-statusbar": "2.2.0",
+        "com.phonegap.plugins.video": "1.0.0"
     }
 }

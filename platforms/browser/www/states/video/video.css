@@ -1,0 +1,45 @@
+.content{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.sub-content{
+  position: absolute;
+  margin: 0;
+  /*top: 5%;*/
+  width: 100%;
+  height: 80%;
+}
+
+.tutorial-btn {
+  display: inline-block;
+  text-align: center;
+  width: 15%;
+  border-style: solid;
+  border-color: gray;
+  border-radius: 15px;
+  font-family: Arial;
+  color: black;
+  font-size: 20px;
+  margin: 10% auto;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.tutorial-btn:active {
+  color: green;
+  text-decoration: none;
+}
+
+.btn-left{
+  position: relative;
+  left: 5%;
+}
+
+.btn-right{
+  position: relative;
+  left: 50%;
+}

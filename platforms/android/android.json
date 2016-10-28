@@ -11,14 +11,29 @@
                         {
                             "xml": "<feature name=\"StatusBar\"><param name=\"android-package\" value=\"org.apache.cordova.statusbar.StatusBar\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"VideoPlayer\"><param name=\"android-package\" value=\"com.phonegap.plugins.video.VideoPlayer\" /></feature>",
+                            "count": 1
                         }
-                    ]
+                    ],
+                    "widget": []
+                }
+            },
+            "AndroidManifest.xml": {
+                "parents": {
+                    "/manifest": [],
+                    "/manifest/application": [],
+                    "/*": []
                 }
             }
         }
     },
     "installed_plugins": {
         "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.phonegap.helloworld"
+        },
+        "com.phonegap.plugins.video": {
             "PACKAGE_NAME": "com.phonegap.helloworld"
         }
     },
@@ -30,9 +45,17 @@
             "clobbers": [
                 "window.StatusBar"
             ]
+        },
+        {
+            "file": "plugins/com.phonegap.plugins.video/3.0.0/www/video.js",
+            "id": "com.phonegap.plugins.video.VideoPlayer",
+            "clobbers": [
+                "VideoPlayer"
+            ]
         }
     ],
     "plugin_metadata": {
-        "cordova-plugin-statusbar": "2.2.0"
+        "cordova-plugin-statusbar": "2.2.0",
+        "com.phonegap.plugins.video": "1.0.0"
     }
 }

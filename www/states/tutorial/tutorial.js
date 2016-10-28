@@ -6,7 +6,6 @@ $(document).ready(function() {
     });
     $("#accordion").on("click", function(){
       var accordion_active = $("#accordion").accordion("option", "active");
-      console.log(accordion_active);
       if (accordion_active === 0) {
         $(".tutorial-btn").hide("fade", {}, 500, {});
       } else {
