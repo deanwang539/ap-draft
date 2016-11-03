@@ -5,7 +5,7 @@
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
         <link rel="stylesheet" type="text/css" href="../../css/vendors/font-awesome-4.6.3/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="../../css/styles.css" />
-        <link rel="stylesheet" type="text/css" href="../../css/vendors/jquery-mobile-1.4.5/jquery-mobile-1.4.5.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/vendors/jquery-mobile-1.4.5/jquery-mobile-1.4.5.min.css" />
         <link rel="stylesheet" type="text/css" href="review.css" />
         <title>Review</title>
     </head>
@@ -33,9 +33,15 @@
                 </li>
               </ul>
             </div>
-            <div class="footer">
-              <a class="tutorial-btn btn-left" href="../experienced/experienced.html" data-ajax="false">Back</a>
-              <a class="tutorial-btn btn-right" href="../video/video.html" data-ajax="false">Skip</a>
+            <div class="footer" data-role="footer">
+            	<div data-role="navbar">
+            		<ul>
+            			<li><a href="../ap/ap.html" data-ajax="false" data-icon="star">ACP</a></li>
+            			<li><a href="#" data-ajax="false" data-icon="grid">Plan</a></li>
+            			<li><a href="../warmup/warmup.html" data-ajax="false" data-icon="check">Warmup</a></li>
+                  <li><a href="#" class="ui-btn-active ui-state-persist" data-ajax="false" data-icon="gear">Review</a></li>
+            		</ul>
+            	</div>
             </div>
           </div>
         </div>
