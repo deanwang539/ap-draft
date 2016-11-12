@@ -6,12 +6,10 @@
   overflow: auto;
 }
 
-.sub-content{
-  position: absolute;
-  margin: 0;
-  /*top: 5%;*/
+.tutorial-accordion{
   width: 100%;
-  height: 80%;
+  height: 100%;
+  overflow: auto;
 }
 
 .tutorial-btn {

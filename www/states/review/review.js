@@ -11,3 +11,12 @@ $(document).on('pageshow', '[data-role="page"]', function(){
         clearInterval(interval);
     },300);
 });
+
+$(document).ready(function(){
+  $('#a-ap').delayed('click', 200, function() {
+    $(location).attr('href', '../ap/ap.html');
+  });
+  $('#a-warmup').delayed('click', 200, function() {
+    $(location).attr('href', '../warmup/warmup.html');
+  });
+});

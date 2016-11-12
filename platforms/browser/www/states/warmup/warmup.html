@@ -9,9 +9,10 @@
         <link rel="stylesheet" type="text/css" href="warmup.css" />
         <title>Warmup</title>
     </head>
-    <body data-role="page">
-        <div class="container">
+    <body>
+        <div class="container" data-role="page">
           <div class="content">
+            <div class="menu-clicked"></div>
             <div data-role="header">
               <h1>Warmup</h1>
             </div>
@@ -23,11 +24,15 @@
                   <span class="hamburger hamburger-2"></span>
                   <span class="hamburger hamburger-3"></span>
                 </label>
-                <a href="#" class="menu-item"> <i class="fa fa-bar-chart"></i> </a>
+                <a id="aChart" href="#" class="menu-item"> <i class="fa fa-bar-chart"></i> </a>
                 <a href="#" class="menu-item"> <i class="fa fa-plus"></i> </a>
                 <a href="#" class="menu-item"> <i class="fa fa-heart"></i> </a>
                 <a href="#" class="menu-item"> <i class="fa fa-envelope"></i> </a>
               </nav>
+              <div id="dChart" class="title-item"></div>
+              <div id="dPlus" class="title-item"></div>
+              <div id="dHeart" class="title-item"></div>
+              <div id="dEnvelope" class="title-item"></div>
             </div>
             <div class="footer" data-role="footer">
             	<div data-role="navbar">

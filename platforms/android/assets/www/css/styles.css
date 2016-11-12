@@ -70,12 +70,12 @@ body{
   border-color: blue;
 }
 
-.tbtn-color:active{
+.tbtn-color:focus{
   color: lightgreen;
   border-color: lightgreen;
 }
 
-.ebtn-color:active{
+.ebtn-color:focus{
   color: lightblue;
   border-color: lightblue;
 }

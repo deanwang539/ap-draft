@@ -40,5 +40,20 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         // console.log('Received Event: ' + id);
+        $(document).ready(function(){
+          $('#a-exp').delayed('click', 500, function() {
+            // $(location).attr('href', 'states/ap/ap.html');
+            window.plugins.nativepagetransitions.slide({
+                // the defaults for direction, duration, etc are all fine
+                "href" : "states/ap/ap.html"
+            });
+          });
+          $('#a-tut').delayed('click', 500, function() {
+            window.plugins.nativepagetransitions.slide({
+              // the defaults for direction, duration, etc are all fine
+              "href" : "states/tutorial/tutorial.html"
+            });
+          });
+        });
     }
 };
