@@ -11,6 +11,7 @@
     <preference name="StatusBarOverlaysWebView" value="true" />
     <preference name="StatusBarBackgroundColor" value="#192c49" />
     <preference name="StatusBarStyle" value="lightcontent" />
+    <preference name="orientation" value="portrait" />
     <access origin="*" />
     <engine name="android" spec="~5.1.1" />
 </widget>
