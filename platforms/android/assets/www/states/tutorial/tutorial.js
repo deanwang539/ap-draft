@@ -1,14 +1,14 @@
 $(document).ready(function() {
-    $("#accordion").accordion({
-        active: false,
-        collapsible: true,
-        heightStyle: "fill"
+  $("#owl-content").owlCarousel();
+  var contentH = $(".content").height();
+  var owlPageH = $(".owl-theme .owl-controls").height();
+  $(".owl-carousel .owl-wrapper-outer").height(contentH - owlPageH*2);
+  $(".owl-carousel .owl-wrapper").height(contentH - owlPageH*2);
+
+  $('.tutorial-btn').delayed('click', 200, function() {
+    window.plugins.nativepagetransitions.slide({
+        "direction" : "up",
+        "href" : "../ap/ap.html"
     });
-    $("#accordion").on("click", function(){
-      var accordion_active = $("#accordion").accordion("option", "active");
-      if (accordion_active === 0) {
-        $(".tutorial-btn").hide("fade", {}, 500, {});
-      } else {
-        $(".tutorial-btn").show("fade", {}, 500, {});
-      }});
+  });
 });

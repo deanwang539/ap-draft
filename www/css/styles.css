@@ -79,3 +79,7 @@ body{
   color: lightblue;
   border-color: lightblue;
 }
+
+.page-center{
+  padding: 35% 15% 0 15%;
+}

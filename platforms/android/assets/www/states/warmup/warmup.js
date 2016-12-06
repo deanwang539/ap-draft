@@ -37,4 +37,10 @@ $(document).ready(function(){
         $(".menu-clicked").hide();
       }
     });
+    $('#a-ap').delayed('click', 200, function() {
+      $(location).attr('href', '../ap/ap.html');
+    });
+    $('#a-review').delayed('click', 200, function() {
+      $(location).attr('href', '../review/review.html');
+    });
 });

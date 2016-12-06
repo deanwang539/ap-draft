@@ -18,4 +18,11 @@ $(document).ready(function(){
   var fTopBorder = $('[data-role="footer"]').css('borderTopWidth').replace("px", "");
   var tHeight = $('.content').height();
   $('#ap-content').height(tHeight-hHeight-fHeight-fTopBorder*2.0);
+
+  $('#a-warmup').delayed('click', 200, function() {
+    $(location).attr('href', '../warmup/warmup.html');
+  });
+  $('#a-review').delayed('click', 200, function() {
+    $(location).attr('href', '../review/review.html');
+  });
 });
