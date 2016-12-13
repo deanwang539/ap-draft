@@ -4,3 +4,39 @@
   width: 100%;
   height: 100%;
 }
+
+#ap-content, #ap-bg{
+  position: relative;
+}
+
+#ap-bg{
+  background-image: url("../../images/ACP_body.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  width: 100%;
+}
+
+/*#ap-head{
+  position: absolute;
+  width: 50%;
+  height: 10%;
+  top:-0.5%;
+  margin-left: 12.5%;
+  background-image: url("../../images/ACP_head.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+#ap-ear{
+  position: absolute;
+  width: 50%;
+  height: 10%;
+  top: 3.5%;
+  margin-left: 43.5%;
+  background-image: url("../../images/ACP_ear.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}*/

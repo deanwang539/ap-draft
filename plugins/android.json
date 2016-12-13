@@ -10,10 +10,10 @@
         "cordova-plugin-statusbar": {
             "PACKAGE_NAME": "com.phonegap.helloworld"
         },
-        "com.phonegap.plugins.video": {
+        "com.telerik.plugins.nativepagetransitions": {
             "PACKAGE_NAME": "com.phonegap.helloworld"
         },
-        "com.telerik.plugins.nativepagetransitions": {
+        "com.hutchind.cordova.plugins.streamingmedia": {
             "PACKAGE_NAME": "com.phonegap.helloworld"
         }
     },

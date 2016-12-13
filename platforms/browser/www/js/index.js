@@ -39,6 +39,22 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        console.log('Received Event: ' + id);
+        // console.log('Received Event: ' + id);
+
+        $(document).ready(function(){
+          // alert(window.innerWidth);
+          $('#a-exp').delayed('click', 300, function() {
+            // $(location).attr('href', 'states/ap/ap.html');
+            window.plugins.nativepagetransitions.slide({
+                // the defaults for direction, duration, etc are all fine
+                "href" : "states/ap/ap.html"
+            });
+          });
+          $('#a-tut').delayed('click', 300, function() {
+            window.plugins.nativepagetransitions.slide({
+              "href" : "states/tutorial/tutorial.html"
+            });
+          });
+        });
     }
 };
