@@ -6,7 +6,7 @@
 }
 
 .tutorial-btn {
-  display: inline-block;
+  display: block;
   text-align: center;
   /*width: 15%;*/
   border-style: solid;

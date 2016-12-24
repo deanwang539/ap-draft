@@ -20,6 +20,16 @@ $(document).ready(function() {
     $('#ap-bg').css('margin-top', $('#ap-content').height() * 0.1 + 'px');
     $('#ap-bg').css('margin-bottom', $('#ap-content').height() * 0.05 + 'px');
 
+    // actions for ap-menu-click
+    $('.ap-menu-clicked').css('padding-top', $('[data-role="header"]').height() + 'px');
+    $("#ap-exp-menu input").click(function() {
+      if ($("#ap-exp-menu input").is(':checked')) {
+        $(".ap-menu-clicked").slideDown();
+      } else {
+        $(".ap-menu-clicked").slideUp();
+      }
+    });
+
     // add des for menu-click
     $("#exp-menu input").click(function() {
         if ($("#exp-menu input").is(':checked')) {
