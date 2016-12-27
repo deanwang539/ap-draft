@@ -5,3 +5,7 @@
 .custom-content-reveal span.custom-content-close:active {
   background-color: #495468;
 }
+
+#plan-content {
+  overflow: scroll;
+}
