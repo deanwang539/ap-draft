@@ -102,7 +102,11 @@
 	content: '\25b8';
 }
 
-.custom-header nav span:hover:before {
+/*
+	it was 
+	.custom-header nav span:hover:before
+*/
+.custom-header nav span:active:before {
 	color: #495468;
 }
 
