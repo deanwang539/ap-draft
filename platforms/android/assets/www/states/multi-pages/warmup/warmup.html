@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <link rel="stylesheet" type="text/css" href="../../css/vendors/font-awesome-4.6.3/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="../../css/styles.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/vendors/jquery-mobile-1.4.5/jquery-mobile-1.4.5.min.css" />
+        <link rel="stylesheet" type="text/css" href="warmup.css" />
+        <title>Warmup</title>
+    </head>
+    <body>
+        <div class="container" data-role="page">
+          <div class="content">
+            <div class="menu-clicked"></div>
+            <div data-role="header">
+              <h1>Warmup</h1>
+            </div>
+            <div id="exp-menu">
+              <nav class="menu">
+                <input data-role="none" type="checkbox" href="#" class="menu-open" name="menu-open" id="menu-open"/>
+                <label class="menu-open-button" for="menu-open">
+                  <span class="hamburger hamburger-1"></span>
+                  <span class="hamburger hamburger-2"></span>
+                  <span class="hamburger hamburger-3"></span>
+                </label>
+                <a id="aChart" href="#" class="menu-item"> <i class="fa fa-bar-chart"></i> </a>
+                <a href="#" class="menu-item"> <i class="fa fa-plus"></i> </a>
+                <a href="#" class="menu-item"> <i class="fa fa-heart"></i> </a>
+                <a href="#" class="menu-item"> <i class="fa fa-envelope"></i> </a>
+              </nav>
+              <div id="dChart" class="title-item"></div>
+              <div id="dPlus" class="title-item"></div>
+              <div id="dHeart" class="title-item"></div>
+              <div id="dEnvelope" class="title-item"></div>
+            </div>
+            <div class="footer" data-role="footer">
+            	<div data-role="navbar">
+            		<ul>
+            			<li><a id="a-ap" href="#" data-ajax="false" data-icon="star">ACP</a></li>
+            			<li><a href="#" data-ajax="false" data-icon="grid">Plan</a></li>
+            			<li><a href="#" class="ui-btn-active ui-state-persist" data-ajax="false" data-icon="check">Warmup</a></li>
+                  <li><a id="a-review" href="#" data-ajax="false" data-icon="gear">Review</a></li>
+            		</ul>
+            	</div>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="../../cordova.js"></script>
+        <script type="text/javascript" src="../../js/vendors/jquery-1.12.4/jquery.min.js"></script>
+        <script type="text/javascript" src="../../js/vendors/jquery-mobile-1.4.5/jquery-mobile-1.4.5.min.js"></script>
+        <script type="text/javascript" src="../../js/vendors/delayed-for-jquery/jquery.delayed-1.1.0.min.js"></script>
+        <script type="text/javascript" src="warmup.js"></script>
+        <script type="text/javascript">
+            // app.initialize();
+        </script>
+    </body>
+</html>

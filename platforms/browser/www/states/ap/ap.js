@@ -10,6 +10,9 @@ $("a[data-role=tab]").each(function() {
 });
 
 $(document).ready(function() {
+    // scroll
+    var sContent = new iScroll('ap-content');
+
     // adjust height for acp page
     var hHeight = $('[data-role="header"]').height();
     var fHeight = $('[data-role="footer"]').height();
@@ -21,12 +24,12 @@ $(document).ready(function() {
     $('#ap-bg').css('margin-bottom', $('#ap-content').height() * 0.05 + 'px');
 
     // actions for ap-menu-click
-    $('.ap-menu-clicked').css('margin-top', $('[data-role="header"]').height() + 'px');
+    $('.ap-menu-clicked').css('padding-top', $('[data-role="header"]').height() + 'px');
     $("#ap-exp-menu input").click(function() {
       if ($("#ap-exp-menu input").is(':checked')) {
-        $(".ap-menu-clicked").show();
+        $(".ap-menu-clicked").slideDown();
       } else {
-        $(".ap-menu-clicked").hide();
+        $(".ap-menu-clicked").slideUp();
       }
     });
 
@@ -73,12 +76,12 @@ $(document).ready(function() {
     });
 
     // plan calendar
-    // test
+    // test data
     var codropsEvents = {
       '12-24-2016' : '<span>Christmas Eve</span>',
     	'12-25-2016' : '<span>Christmas Day</span>',
     };
-    // end test
+    // end test data
     var transEndEventNames = {
             'WebkitTransition': 'webkitTransitionEnd',
             'MozTransition': 'transitionend',
@@ -131,7 +134,6 @@ $(document).ready(function() {
 
         var $events = $('#custom-content-reveal');
         if ($events.length > 0) {
-
             $events.css('top', '100%');
             Modernizr.csstransitions ? $events.on(transEndEventName, function() {
                 $(this).remove();
@@ -139,4 +141,8 @@ $(document).ready(function() {
         }
     }
 
+    var chHeight = $('.custom-header').outerHeight();
+    var caHeight = $('#calendar').outerHeight();
+    $('#plan-content').height(tHeight - chHeight - caHeight - hHeight - fHeight - fTopBorder * 2.0 -20.0);
+    $('#plan-content').getNiceScroll().resize();
 });

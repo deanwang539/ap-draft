@@ -1,3 +1,16 @@
 .custom-calendar-wrap {
   margin: 0 auto;
 }
+
+.custom-content-reveal span.custom-content-close:active {
+  background-color: #495468;
+}
+
+#plan-content {
+  padding: 10px 30px;
+  overflow: auto;
+}
+
+#plan-content ul {
+  list-style-type: none;
+}
