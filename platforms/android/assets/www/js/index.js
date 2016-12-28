@@ -40,20 +40,45 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         // console.log('Received Event: ' + id);
-
         $(document).ready(function(){
-          // alert(window.innerWidth);
-          $('#a-exp').delayed('click', 300, function() {
-            // $(location).attr('href', 'states/ap/ap.html');
-            window.plugins.nativepagetransitions.slide({
-                // the defaults for direction, duration, etc are all fine
-                "href" : "states/ap/ap.html"
-            });
-          });
-          $('#a-tut').delayed('click', 300, function() {
-            window.plugins.nativepagetransitions.slide({
+          // $('#a-exp').delayed('click', 300, function() {
+          //   window.plugins.nativepagetransitions.slide({
+          //       "href" : "states/ap/ap.html"
+          //   });
+          // });
+          // $('#a-tut').delayed('click', 300, function() {
+          //   window.plugins.nativepagetransitions.slide({
+          //     "href" : "states/tutorial/tutorial.html"
+          //   });
+          // });
+          $('#a-tut').on('click', function(){
+            var options = {
+              "direction"        : "left", // 'left|right|up|down', default 'left' (which is like 'next')
+              "duration"         :  300, // in milliseconds (ms), default 400
+              "slowdownfactor"   :    3, // overlap views (higher number is more) or no overlap (1). -1 doesn't slide at all. Default 4
+              "androiddelay"     :  -1, // same as above but for Android, default 70
               "href" : "states/tutorial/tutorial.html"
-            });
+            };
+            window.plugins.nativepagetransitions.slide(
+              options,
+              function (msg) {console.log("success: " + msg);}, // called when the animation has finished
+              function (msg) {alert("error: " + msg);} // called in case you pass in weird values
+            );
+          });
+          $('#a-exp').on('click', function(){
+            var options = {
+              "direction"        : "down", // 'left|right|up|down', default 'left' (which is like 'next')
+              "duration"         :  300, // in milliseconds (ms), default 400
+              "slowdownfactor"   :    3, // overlap views (higher number is more) or no overlap (1). -1 doesn't slide at all. Default 4
+              "slidePixels"      :  100, // optional, works nice with slowdownfactor -1 to create a 'material design'-like effect. Default not set so it slides the entire page.
+              "androiddelay"     :  -1, // same as above but for Android, default 70
+              "href" : "states/ap/ap.html"
+            };
+            window.plugins.nativepagetransitions.slide(
+              options,
+              function (msg) {console.log("success: " + msg);}, // called when the animation has finished
+              function (msg) {alert("error: " + msg);} // called in case you pass in weird values
+            );
           });
         });
     }
