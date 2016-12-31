@@ -168,8 +168,7 @@ var app = {
 
             var chHeight = $('.custom-header').outerHeight();
             var caHeight = $('#calendar').outerHeight();
-            $('#plan-content').height(tHeight - chHeight - caHeight - hHeight - fHeight - fTopBorder * 2.0 -20.0);
-            // $('#plan-content').getNiceScroll().resize();
+            $('#plan-content').height(tHeight - chHeight - caHeight - hHeight - fHeight - fTopBorder * 2.0 - 40.0);
         });
     }
 };

@@ -98,35 +98,42 @@
     							<h3 id="custom-year" class="custom-year"></h3>
     						</div>
     						<div id="calendar" class="fc-calendar-container"></div>
-                <div id="plan-content">
+                <div id="plan-content" class="text-center">
+                  <h1>Today's Reminder</h1>
                   <ul>
-                    <li>p</li>
-                    <li>p</li>
-                    <li>p</li>
-                    <li>p</li>
-                    <li>p</li>
-                    <li>p</li>
-                    <li>p</li>
-                    <li>p</li>
-                    <li>p</li>
-                    <li>p</li>
-                    <li>p</li>
-                    <li>p</li>
-                    <li>p</li>
-                    <li>p</li>
-                    <li>p</li>
-                    <li>p</li>
-                    <li>p</li>
-                    <li>p</li>
-                    <li>p</li>
-                    <li>p</li>
-                    <li>p</li>
-                    <li>p</li>
-                    <li>p</li>
-                    <li>p</li>
-                    <li>a</li>
-                    <li>b</li>
+                    <li>None. Enjoy your day!</li>
                   </ul>
+                  <div>
+                    <a href="#rem-manager" data-rel="popup" style="text-decoration: none; display: inline-block" data-position-to="window" data-transition="pop">
+                      <button class="rem-btn btn-no-shadow">Reminder Manager</button>
+                    </a>
+                    <div data-role="popup" id="rem-manager" data-overlay-theme="a" data-dismissible="false">
+                      <div data-role="header">
+                        <h1>Reminder Manager</h1>
+                      </div>
+                      <div role="main" class="ui-content rem-content text-center">
+                        <h3 class="ui-title">Here is where to manage the reminders!</h3>
+                        <div>
+                          <p class="sub-title">Modify reminders to help with the procedure.</p>
+                          <a href="#" style="text-decoration: none">
+                            <button class="btn-no-shadow">All Reminders</button>
+                          </a>
+                          <a href="#" style="text-decoration: none">
+                            <button class="btn-no-shadow">Add Reminders</button>
+                          </a>
+                          <a href="#" style="text-decoration: none">
+                            <button class="btn-no-shadow">Edit Reminders</button>
+                          </a>
+                          <a href="#" style="text-decoration: none">
+                            <button class="btn-no-shadow">Delete Reminders</button>
+                          </a>
+                        </div>
+                        <a href="#plan" style="text-decoration: none; display: inline-block">
+                          <button class="btn-no-shadow">Done</button>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
     					</div>
     				</div>
@@ -225,7 +232,6 @@
         <script type="text/javascript" src="../../js/vendors/calendario/jquery.calendario.js"></script>
         <script type="text/javascript" src="../../js/vendors/calendario/modernizr.custom.63321.js"></script>
         <script type="text/javascript" src="../../js/vendors/iscroll-4/iscroll-lite.js"></script>
-        <!-- <script type="text/javascript" src="../../js/vendors/nicescroll/jquery.nicescroll.js"></script> -->
         <!-- <script type="text/javascript" src="../../js/vendors/calendario/data.js"></script> -->
         <script type="text/javascript" src="ap.js"></script>
         <script type="text/javascript">
