@@ -100,7 +100,7 @@ var app = {
                 }
             });
 
-            // plan calendar
+            // create calendar
             // test data
             var codropsEvents = {
               '12-24-2016' : '<span>Christmas Eve</span>',
@@ -166,9 +166,73 @@ var app = {
                 }
             }
 
+            // adjust height for scrollable area below calendar
             var chHeight = $('.custom-header').outerHeight();
             var caHeight = $('#calendar').outerHeight();
             $('#plan-content').height(tHeight - chHeight - caHeight - hHeight - fHeight - fTopBorder * 2.0 - 40.0);
+
+            // chain popups for reminders
+            var page_width = window.innerWidth;
+            // open and close all-reminders
+            $('#btn-all-rem').on('click', function() {
+              $('#rem-manager').one({
+                  popupafterclose: function() {
+                      setTimeout(function(){
+                        $('#all-reminders').css({'width':page_width*0.8});
+                        $('#all-reminders').popup('open', {transition: "fade"});
+                      }, 100);
+                  }
+              });
+            });
+            $('#back-to-rem').on('click', function() {
+              $('#all-reminders').one({
+                  popupafterclose: function() {
+                      setTimeout(function(){
+                        $('#rem-manager').popup('open', {transition: "fade"});
+                      }, 100);
+                  }
+              });
+            });
+            // open and close add-reminders
+            $('#btn-add-rem').on('click', function() {
+              $('#rem-manager').one({
+                  popupafterclose: function() {
+                      setTimeout(function(){
+                        $('#add-reminders').css({'width':page_width*0.8});
+                        $('#add-reminders').popup('open', {transition: "fade"});
+                      }, 100);
+                  }
+              });
+            });
+            $('#back-to-rem2').on('click', function() {
+              $('#add-reminders').one({
+                  popupafterclose: function() {
+                      setTimeout(function(){
+                        $('#rem-manager').popup('open', {transition: "fade"});
+                      }, 100);
+                  }
+              });
+            });
+            // open and close edit-reminders
+            $('#btn-edit-rem').on('click', function() {
+              $('#rem-manager').one({
+                  popupafterclose: function() {
+                      setTimeout(function(){
+                        $('#edit-reminders').css({'width':page_width*0.8});
+                        $('#edit-reminders').popup('open', {transition: "fade"});
+                      }, 100);
+                  }
+              });
+            });
+            $('#back-to-rem3').on('click', function() {
+              $('#edit-reminders').one({
+                  popupafterclose: function() {
+                      setTimeout(function(){
+                        $('#rem-manager').popup('open', {transition: "fade"});
+                      }, 100);
+                  }
+              });
+            });
         });
     }
 };
