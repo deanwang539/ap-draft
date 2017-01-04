@@ -7,10 +7,30 @@
 }
 
 #plan-content {
-  padding: 10px 30px;
+  padding: 20px 30px;
   overflow: auto;
 }
 
 #plan-content ul {
   list-style-type: none;
+  margin: 20px;
+  /*test size*/
+  font-size: 20px;
+}
+
+.rem-btn {
+  /*test size*/
+  font-size: 20px !important;
+}
+
+.rem-container {
+  padding: 15px 15px 0 15px !important;
+}
+
+.rem-content {
+  margin: 0 0 20px 0;
+}
+
+.sub-title {
+  margin: 0 0 15px 0;
 }

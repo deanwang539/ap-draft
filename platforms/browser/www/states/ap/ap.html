@@ -98,10 +98,104 @@
     							<h3 id="custom-year" class="custom-year"></h3>
     						</div>
     						<div id="calendar" class="fc-calendar-container"></div>
-                <div id="plan-content">
+                <div id="plan-content" class="text-center">
+                  <h1>Today's Reminder</h1>
                   <ul>
-                    <li>p</li>
+                    <li>None. Enjoy your day!</li>
                   </ul>
+                  <div class="rem-container">
+                    <a href="#rem-manager" data-rel="popup" style="text-decoration: none; display: inline-block" data-position-to="window" data-transition="pop">
+                      <button class="rem-btn btn-no-shadow">Reminder Manager</button>
+                    </a>
+                    <!-- popup for reminder manager -->
+                    <div data-role="popup" id="rem-manager" data-overlay-theme="a" data-dismissible="false">
+                      <div data-role="header" data-theme="b">
+                        <h1>Reminder Manager</h1>
+                      </div>
+                      <div role="main" class="ui-content rem-container text-center">
+                        <h3 class="ui-title">Here is where to manage the reminders!</h3>
+                        <div class="rem-content">
+                          <p class="sub-title">&#10033;Reminders help with the procedure.</p>
+                          <a href="#all-reminders" id="btn-all-rem" style="text-decoration: none">
+                            <button class="btn-no-shadow">All Reminders</button>
+                          </a>
+                          <a href="#add-reminders" id="btn-add-rem" style="text-decoration: none">
+                            <button class="btn-no-shadow">Add Reminders</button>
+                          </a>
+                          <a href="#edit-reminders" id="btn-edit-rem" style="text-decoration: none">
+                            <button class="btn-no-shadow">Edit Reminders</button>
+                          </a>
+                        </div>
+                        <a href="#plan" style="text-decoration: none; display: inline-block">
+                          <button class="btn-no-shadow">Done</button>
+                        </a>
+                      </div>
+                    </div>
+                    <!-- popup for all-reminders -->
+                    <div data-role="popup" id="all-reminders" data-overlay-theme="a" data-dismissible="false">
+                      <div data-role="header" data-theme="b">
+                        <a href="#plan" id="back-to-rem" class="ui-btn ui-icon-arrow-l ui-btn-icon-left">Back</a>
+                        <h1>All Reminders</h1>
+                      </div>
+                      <div data-role="main" class="ui-content rem-container text-center">
+                        <h3 class="ui-title">Here are all the reminders!</h3>
+                        <table data-role="table" data-mode="column" id="allTable" class="ui-responsive">
+                          <thead>
+                            <tr>
+                              <th style="text-align:center">Title</th>
+                              <th style="text-align:center">Time</th>
+                              <th style="text-align:center">Repeat</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <!-- popup for add-reminders -->
+                    <div data-role="popup" id="add-reminders" data-overlay-theme="a" data-dismissible="false">
+                      <div data-role="header" data-theme="b">
+                        <a href="#plan" id="back-to-rem2" class="ui-btn ui-icon-arrow-l ui-btn-icon-left">Back</a>
+                        <h1>Add Reminders</h1>
+                      </div>
+                      <div data-role="main" class="ui-content rem-container">
+                        <p>
+                            Enter title and message for the reminder:
+                            <input type="text" id="title" placeholder="Title" />
+                            <input type="text" id="message" placeholder="Message" />
+                            Enter date and time to trigger reminder:
+                            <input type="date" id="date" />
+                            <input type="time" id="time" />
+                            <div class="text-center">
+                              <a href="#" style="text-decoration: none; display: inline-block"><button class="btn-no-shadow">Add</button></a>
+                            </div>
+                        </p>
+                      </div>
+                    </div>
+                    <!-- popup for edit-reminders -->
+                    <div data-role="popup" id="edit-reminders" data-overlay-theme="a" data-dismissible="false">
+                      <div data-role="header" data-theme="b">
+                        <a href="#plan" id="back-to-rem3" class="ui-btn ui-icon-arrow-l ui-btn-icon-left">Back</a>
+                        <h1>Edit Reminders</h1>
+                      </div>
+                      <div data-role="main" class="ui-content rem-container text-center">
+                        <table data-role="table" data-mode="column" id="editTable" class="ui-responsive">
+                          <thead>
+                            <tr>
+                              <th style="text-align:center">Title</th>
+                              <th style="text-align:center">Repeat</th>
+                              <th style="text-align:center">Delete</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          </tbody>
+                        </table>
+                        <div class="text-center">
+                          <a href="#" style="text-decoration: none; display: inline-block"><button>Save</button></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
     					</div>
     				</div>

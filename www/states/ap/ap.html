@@ -103,7 +103,7 @@
                   <ul>
                     <li>None. Enjoy your day!</li>
                   </ul>
-                  <div>
+                  <div class="rem-container">
                     <a href="#rem-manager" data-rel="popup" style="text-decoration: none; display: inline-block" data-position-to="window" data-transition="pop">
                       <button class="rem-btn btn-no-shadow">Reminder Manager</button>
                     </a>
@@ -139,7 +139,7 @@
                       </div>
                       <div data-role="main" class="ui-content rem-container text-center">
                         <h3 class="ui-title">Here are all the reminders!</h3>
-                        <table data-role="table" data-mode="column" id="allTable" class="ui-responsive table-stroke">
+                        <table data-role="table" data-mode="column" id="allTable" class="ui-responsive">
                           <thead>
                             <tr>
                               <th style="text-align:center">Title</th>
@@ -163,11 +163,17 @@
                             Enter title and message for the reminder:
                             <input type="text" id="title" placeholder="Title" />
                             <input type="text" id="message" placeholder="Message" />
+                            <select id="repeat_add_rem">
+                              <option value="" disabled selected>Repeat</option>
+                              <option value="0">Once</option>
+                              <option value="day">Day</option>
+                              <option value="week">Week</option>
+                            </select>
                             Enter date and time to trigger reminder:
                             <input type="date" id="date" />
                             <input type="time" id="time" />
                             <div class="text-center">
-                              <a href="#" style="text-decoration: none; display: inline-block"><button class="btn-no-shadow">Add</button></a>
+                              <a href="javascript:add_reminder()" style="text-decoration: none; display: inline-block"><button class="btn-no-shadow">Add</button></a>
                             </div>
                         </p>
                       </div>
@@ -179,21 +185,22 @@
                         <h1>Edit Reminders</h1>
                       </div>
                       <div data-role="main" class="ui-content rem-container text-center">
-                        <div data-role="main" class="ui-content">
-                          <table data-role="table" data-mode="column" id="editTable" class="ui-responsive table-stroke">
-                            <thead>
-                              <tr>
-                                <th>Title</th>
-                                <th>Repeat</th>
-                                <th>Remove</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                          </table>
-                          <div class="text-center">
-                            <a href="#" style="text-decoration: none; display: inline-block"><button>Save</button></a>
-                          </div>
+                        <table data-role="table" data-mode="column" id="editTable" class="ui-responsive">
+                          <thead>
+                            <tr>
+                              <th style="text-align:center">Title</th>
+                              <th style="text-align:center">Message</th>
+                              <th style="text-align:center">Date</th>
+                              <th style="text-align:center">Time</th>
+                              <th style="text-align:center">Repeat</th>
+                              <th style="text-align:center">Delete</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          </tbody>
+                        </table>
+                        <div class="text-center">
+                          <a href="javascript:edit_reminder()" style="text-decoration: none; display: inline-block"><button>Save</button></a>
                         </div>
                       </div>
                     </div>

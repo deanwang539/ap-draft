@@ -35,7 +35,8 @@ var app = {
         $(".owl-carousel .owl-wrapper-outer").height(contentH - owlPageH*2);
         $(".owl-carousel .owl-wrapper").height(contentH - owlPageH*2);
 
-        $('#continue').delayed('click', 300, function() {
+        // $('#continue').delayed('click', 300, function() {
+        $('#continue').on('click', function() {
           // page transitions
           window.plugins.nativepagetransitions.slide({
             "direction"        : "down", // 'left|right|up|down', default 'left' (which is like 'next')

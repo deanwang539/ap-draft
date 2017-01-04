@@ -70,14 +70,20 @@ body{
   border-color: blue;
 }
 
-.tbtn-color:focus{
+.tbtn-color:active{
   color: lightgreen;
   border-color: lightgreen;
 }
 
-.ebtn-color:focus{
+.ebtn-color:active{
   color: lightblue;
   border-color: lightblue;
+}
+
+.btn-no-shadow {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
 }
 
 .page-center{

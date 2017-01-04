@@ -1,3 +1,5 @@
+var info = null;
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -32,8 +34,12 @@ var app = {
         $(document).ready(function() {
             // page transition execution
             window.plugins.nativepagetransitions.executePendingTransition(
-              function (msg) {console.log("success: " + msg);}, // called when the animation has finished
-              function (msg) {alert("error: " + msg);} // called in case you pass in weird values
+                function(msg) {
+                    console.log("success: " + msg);
+                }, // called when the animation has finished
+                function(msg) {
+                    alert("error: " + msg);
+                } // called in case you pass in weird values
             );
             // scroll
             var sContent = new iScroll('ap-content');
@@ -51,11 +57,11 @@ var app = {
             // actions for ap-menu-click
             $('.ap-menu-clicked').css('padding-top', $('[data-role="header"]').height() + 'px');
             $("#ap-exp-menu input").click(function() {
-              if ($("#ap-exp-menu input").is(':checked')) {
-                $(".ap-menu-clicked").slideDown();
-              } else {
-                $(".ap-menu-clicked").slideUp();
-              }
+                if ($("#ap-exp-menu input").is(':checked')) {
+                    $(".ap-menu-clicked").slideDown();
+                } else {
+                    $(".ap-menu-clicked").slideUp();
+                }
             });
 
             // add des for menu-click
@@ -103,8 +109,8 @@ var app = {
             // create calendar
             // test data
             var codropsEvents = {
-              '12-24-2016' : '<span>Christmas Eve</span>',
-            	'12-25-2016' : '<span>Christmas Day</span>',
+                '12-24-2016': '<span>Christmas Eve</span>',
+                '12-25-2016': '<span>Christmas Day</span>',
             };
             // end test data
             var transEndEventNames = {
@@ -175,64 +181,246 @@ var app = {
             var page_width = window.innerWidth;
             // open and close all-reminders
             $('#btn-all-rem').on('click', function() {
-              $('#rem-manager').one({
-                  popupafterclose: function() {
-                      setTimeout(function(){
-                        $('#all-reminders').css({'width':page_width*0.8});
-                        $('#all-reminders').popup('open', {transition: "fade"});
-                      }, 100);
-                  }
-              });
+                $('#rem-manager').one({
+                    popupafterclose: function() {
+                        // update tables for all-reminders
+                        var html = '';
+                        for (var count = 0; count < info.data.length; count++) {
+                            var repeatTime = "";
+                            if (info.data[count][4] === "0") {
+                                repeatTime = "Once";
+                            } else {
+                                repeatTime = "Every&nbsp;" + info.data[count][4];
+                            }
+                            html = html +
+                                "<tr><td style='text-align:center'>" +
+                                info.data[count][1] + "</td><td style='text-align:center'>" +
+                                new Date(info.data[count][3]).toLocaleString() + "</td><td style='text-align:center'>" +
+                                repeatTime +
+                                "</td></tr>";
+                        }
+                        $("table#allTable tbody").empty();
+                        $("table#allTable tbody").append(html).closest("table#allTable").table("refresh").trigger("create");
+
+                        // popup for all-reminders page
+                        setTimeout(function() {
+                            $('#all-reminders').css({
+                                'width': page_width * 0.8
+                            });
+                            $('#all-reminders').popup('open', {
+                                transition: "fade"
+                            });
+                        }, 100);
+                    }
+                });
             });
             $('#back-to-rem').on('click', function() {
-              $('#all-reminders').one({
-                  popupafterclose: function() {
-                      setTimeout(function(){
-                        $('#rem-manager').popup('open', {transition: "fade"});
-                      }, 100);
-                  }
-              });
+                $('#all-reminders').one({
+                    popupafterclose: function() {
+                        setTimeout(function() {
+                            $('#rem-manager').popup('open', {
+                                transition: "fade"
+                            });
+                        }, 100);
+                    }
+                });
             });
             // open and close add-reminders
             $('#btn-add-rem').on('click', function() {
-              $('#rem-manager').one({
-                  popupafterclose: function() {
-                      setTimeout(function(){
-                        $('#add-reminders').css({'width':page_width*0.8});
-                        $('#add-reminders').popup('open', {transition: "fade"});
-                      }, 100);
-                  }
-              });
+                $('#rem-manager').one({
+                    popupafterclose: function() {
+                        setTimeout(function() {
+                            $('#add-reminders').css({
+                                'width': page_width * 0.8
+                            });
+                            $('#add-reminders').popup('open', {
+                                transition: "fade"
+                            });
+                        }, 100);
+                    }
+                });
             });
             $('#back-to-rem2').on('click', function() {
-              $('#add-reminders').one({
-                  popupafterclose: function() {
-                      setTimeout(function(){
-                        $('#rem-manager').popup('open', {transition: "fade"});
-                      }, 100);
-                  }
-              });
+                $('#add-reminders').one({
+                    popupafterclose: function() {
+                        setTimeout(function() {
+                            $('#rem-manager').popup('open', {
+                                transition: "fade"
+                            });
+                        }, 100);
+                    }
+                });
             });
             // open and close edit-reminders
             $('#btn-edit-rem').on('click', function() {
-              $('#rem-manager').one({
-                  popupafterclose: function() {
-                      setTimeout(function(){
-                        $('#edit-reminders').css({'width':page_width*0.8});
-                        $('#edit-reminders').popup('open', {transition: "fade"});
-                      }, 100);
-                  }
-              });
+                $('#rem-manager').one({
+                    popupafterclose: function() {
+                        var html = '';
+                        for (var count = 0; count < info.data.length; count++) {
+                          var optionBody = '';
+                          if(info.data[count][4] === "0") {
+                            optionBody = "<option value='0' selected>Once</option>" +
+                                         "<option value='day'>Day</option>" +
+                                         "<option value='week'>Week</option>";
+                          } else if(info.data[count][4] === "day") {
+                            optionBody = "<option value='0'>Once</option>" +
+                                         "<option value='day' selected>Day</option>" +
+                                         "<option value='week'>Week</option>";
+                          } else if(info.data[count][4] === "week") {
+                            optionBody = "<option value='0'>Once</option>" +
+                                         "<option value='day'>Day</option>" +
+                                         "<option value='week' selected>Week</option>";
+                          }
+                          html = html + "<tr id=" + info.data[count][0] + "><td style='text-align:center'>" +
+                              "<input type='text' id='title_" + info.data[count][0]  + "' placeholder='"+ info.data[count][1] +"' />" +
+                              "</td><td style='text-align:center'>" +
+                              "<input type='text' id='message_" + info.data[count][0]  + "' placeholder='"+ info.data[count][2] +"' />" +
+                              "</td><td style='text-align:center'>" +
+                              "<input type='date' id='date_" + info.data[count][0]  + "' placeholder='" + addZero(new Date(info.data[count][3]).getMonth()+1) + "/" + addZero(new Date(info.data[count][3]).getDate()) + "'/>" +
+                              "</td><td style='text-align:center'>" +
+                              "<input type='time' id='time_" + info.data[count][0]  + "' placeholder='"+ addZero(new Date(info.data[count][3]).getHours()) +":" + new Date(info.data[count][3]).getMinutes() +"'/>" +
+                              "</td><td style='text-align:center'><select id='repeat_add_rem_" + info.data[count][0] + "'>" +
+                              optionBody +
+                              "</select></td></tr>";
+                        }
+                        $("table#editTable tbody").empty();
+                        $("table#editTable tbody").append(html).closest("table#editTable").table("refresh").trigger("create");
+                        $('input[type="date"], input[type="time"]').each(function() {
+                            var el = this, type = $(el).attr('type');
+                            if ($(el).val() === '') $(el).attr('type', 'text');
+                            $(el).focus(function() {
+                                $(el).attr('type', type);
+                                el.click();
+                            });
+                            $(el).blur(function() {
+                                if ($(el).val() === '') $(el).attr('type', 'text');
+                            });
+                        });
+                        setTimeout(function() {
+                            $('#edit-reminders').css({
+                                'width': page_width * 0.8
+                            });
+                            $('#edit-reminders').popup('open', {
+                                transition: "fade"
+                            });
+                        }, 100);
+                    }
+                });
             });
             $('#back-to-rem3').on('click', function() {
-              $('#edit-reminders').one({
-                  popupafterclose: function() {
-                      setTimeout(function(){
-                        $('#rem-manager').popup('open', {transition: "fade"});
-                      }, 100);
-                  }
-              });
+                $('#edit-reminders').one({
+                    popupafterclose: function() {
+                        setTimeout(function() {
+                            $('#rem-manager').popup('open', {
+                                transition: "fade"
+                            });
+                        }, 100);
+                    }
+                });
             });
         });
+
+        // logic for reminder actions
+        if (!localStorage.getItem("rp_data")) {
+            var rp_data = {
+                data: []
+            };
+            localStorage.setItem("rp_data", JSON.stringify(rp_data));
+        }
+
+        info = JSON.parse(localStorage.getItem("rp_data"));
+
     }
 };
+
+function schedule(id, title, message, schedule_time, repeat) {
+    cordova.plugins.notification.local.schedule({
+        id: id,
+        title: title,
+        message: message,
+        at: schedule_time,
+        every: repeat
+    });
+
+    var array = [id, title, message, schedule_time, repeat];
+    info.data[info.data.length] = array;
+    localStorage.setItem("rp_data", JSON.stringify(info));
+
+    navigator.notification.alert("Reminder added successfully");
+    $('#back-to-rem2').click();
+}
+
+function edit(id, repeatTime) {
+    cordova.plugins.notification.local.update({
+        id: id,
+        every: repeatTime
+    });
+
+    info.data[id][4] = repeatTime;
+    localStorage.setItem("rp_data", JSON.stringify(info));
+
+    navigator.notification.alert("Reminder edited successfully");
+}
+
+function add_reminder() {
+    var date = document.getElementById("date").value;
+    var time = document.getElementById("time").value;
+    var title = document.getElementById("title").value;
+    var message = document.getElementById("message").value;
+    var repeat = document.getElementById("repeat_add_rem").value;
+
+    if (date === "" || time === "" || title === "" || message === "") {
+        navigator.notification.alert("Please enter all details");
+        return;
+    }
+
+    var schedule_time = new Date((date + " " + time).replace(/-/g, "/")).getTime();
+    schedule_time = new Date(schedule_time);
+
+    var id = info.data.length;
+
+    cordova.plugins.notification.local.hasPermission(function(granted) {
+        if (granted === true) {
+            schedule(id, title, message, schedule_time, repeat);
+        } else {
+            cordova.plugins.notification.local.registerPermission(function(granted) {
+                if (granted === true) {
+                    schedule(id, title, message, schedule_time, repeat);
+                } else {
+                    navigator.notification.alert("Reminder cannot be added because app doesn't have permission");
+                }
+            });
+        }
+    });
+}
+
+function edit_reminder() {
+    var rem_id = document.getElementById("rem_id").value;
+    var repeatTime = document.getElementById("repeatTime").value;
+
+    if (repeatTime === "") {
+        navigator.notification.alert("Please select repeat time");
+        return;
+    }
+
+    cordova.plugins.notification.local.hasPermission(function(granted) {
+        if (granted === true) {
+            edit(rem_id, repeatTime);
+        } else {
+            cordova.plugins.notification.local.registerPermission(function(granted) {
+                if (granted === true) {
+                    edit(rem_id, repeatTime);
+                } else {
+                    navigator.notification.alert("Reminder cannot be added because app doesn't have permission");
+                }
+            });
+        }
+    });
+}
+
+function addZero(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
