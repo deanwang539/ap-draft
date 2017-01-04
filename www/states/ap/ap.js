@@ -1,4 +1,6 @@
 var info = null;
+var codropsEvents = {};
+var transEndEventNames = {};
 
 var app = {
     // Application Constructor
@@ -41,6 +43,16 @@ var app = {
                     alert("error: " + msg);
                 } // called in case you pass in weird values
             );
+
+            // data for calendar
+            if (!localStorage.getItem("rp_data")) {
+                var rp_data = {
+                    data: []
+                };
+                localStorage.setItem("rp_data", JSON.stringify(rp_data));
+            }
+
+            info = JSON.parse(localStorage.getItem("rp_data"));
             // scroll
             var sContent = new iScroll('ap-content');
 
@@ -107,13 +119,20 @@ var app = {
             });
 
             // create calendar
-            // test data
-            var codropsEvents = {
-                '12-24-2016': '<span>Christmas Eve</span>',
-                '12-25-2016': '<span>Christmas Day</span>',
-            };
-            // end test data
-            var transEndEventNames = {
+            for (var count = 0; count < info.data.length; count++) {
+              if(info.data[count][5]) {
+                continue;
+              }
+              var nDate = new Date(info.data[count][3]);
+              var date_format = addZero(nDate.getMonth()+1) + "-" + addZero(nDate.getDate()) + "-" + nDate.getFullYear();
+              var date_content = info.data[count][1];
+              if(codropsEvents.hasOwnProperty(date_format)) {
+                codropsEvents[date_format] += '<span>'+ date_content +'</span>';
+              } else {
+                codropsEvents[date_format] = '<span>'+ date_content +'</span>';
+              }
+            }
+            transEndEventNames = {
                     'WebkitTransition': 'webkitTransitionEnd',
                     'MozTransition': 'transitionend',
                     'OTransition': 'oTransitionEnd',
@@ -134,13 +153,44 @@ var app = {
                 }),
                 $month = $('#custom-month').html(cal.getMonthName()),
                 $year = $('#custom-year').html(cal.getYear());
-
             $('#custom-next').on('click', function() {
                 cal.gotoNextMonth(updateMonthYear);
             });
             $('#custom-prev').on('click', function() {
                 cal.gotoPreviousMonth(updateMonthYear);
             });
+            // var codropsEvents = {
+            //     '12-24-2016': '<span>Christmas Eve</span>',
+            //     '12-25-2016': '<span>Christmas Day</span>',
+            // };
+            // var transEndEventNames = {
+            //         'WebkitTransition': 'webkitTransitionEnd',
+            //         'MozTransition': 'transitionend',
+            //         'OTransition': 'oTransitionEnd',
+            //         'msTransition': 'MSTransitionEnd',
+            //         'transition': 'transitionend'
+            //     },
+            //     transEndEventName = transEndEventNames[Modernizr.prefixed('transition')],
+            //     $wrapper = $('#custom-inner'),
+            //     $calendar = $('#calendar'),
+            //     cal = $calendar.calendario({
+            //         onDayClick: function($el, $contentEl, dateProperties) {
+            //             if ($contentEl.length > 0) {
+            //                 showEvents($contentEl, dateProperties);
+            //             }
+            //         },
+            //         caldata: codropsEvents,
+            //         displayWeekAbbr: true
+            //     }),
+            //     $month = $('#custom-month').html(cal.getMonthName()),
+            //     $year = $('#custom-year').html(cal.getYear());
+            //
+            // $('#custom-next').on('click', function() {
+            //     cal.gotoNextMonth(updateMonthYear);
+            // });
+            // $('#custom-prev').on('click', function() {
+            //     cal.gotoPreviousMonth(updateMonthYear);
+            // });
 
             function updateMonthYear() {
                 $month.html(cal.getMonthName());
@@ -186,18 +236,20 @@ var app = {
                         // update tables for all-reminders
                         var html = '';
                         for (var count = 0; count < info.data.length; count++) {
-                            var repeatTime = "";
-                            if (info.data[count][4] === "0") {
-                                repeatTime = "Once";
-                            } else {
-                                repeatTime = "Every&nbsp;" + info.data[count][4];
+                            if (info.data[count][5] === false) {
+                              var repeatTime = "";
+                              if (info.data[count][4] === "0") {
+                                  repeatTime = "Once";
+                              } else {
+                                  repeatTime = "Every&nbsp;" + info.data[count][4];
+                              }
+                              html = html +
+                                  "<tr><td style='text-align:center'>" +
+                                  info.data[count][1] + "</td><td style='text-align:center'>" +
+                                  new Date(info.data[count][3]).toLocaleString() + "</td><td style='text-align:center'>" +
+                                  repeatTime +
+                                  "</td></tr>";
                             }
-                            html = html +
-                                "<tr><td style='text-align:center'>" +
-                                info.data[count][1] + "</td><td style='text-align:center'>" +
-                                new Date(info.data[count][3]).toLocaleString() + "</td><td style='text-align:center'>" +
-                                repeatTime +
-                                "</td></tr>";
                         }
                         $("table#allTable tbody").empty();
                         $("table#allTable tbody").append(html).closest("table#allTable").table("refresh").trigger("create");
@@ -257,31 +309,33 @@ var app = {
                     popupafterclose: function() {
                         var html = '';
                         for (var count = 0; count < info.data.length; count++) {
-                          var optionBody = '';
-                          if(info.data[count][4] === "0") {
-                            optionBody = "<option value='0' selected>Once</option>" +
-                                         "<option value='day'>Day</option>" +
-                                         "<option value='week'>Week</option>";
-                          } else if(info.data[count][4] === "day") {
-                            optionBody = "<option value='0'>Once</option>" +
-                                         "<option value='day' selected>Day</option>" +
-                                         "<option value='week'>Week</option>";
-                          } else if(info.data[count][4] === "week") {
-                            optionBody = "<option value='0'>Once</option>" +
-                                         "<option value='day'>Day</option>" +
-                                         "<option value='week' selected>Week</option>";
+                          if(info.data[count][5] === false) {
+                            var optionBody = '';
+                            if(info.data[count][4] === "0") {
+                              optionBody = "<option value='0' selected>Once</option>" +
+                                           "<option value='day'>Day</option>" +
+                                           "<option value='week'>Week</option>";
+                            } else if(info.data[count][4] === "day") {
+                              optionBody = "<option value='0'>Once</option>" +
+                                           "<option value='day' selected>Day</option>" +
+                                           "<option value='week'>Week</option>";
+                            } else if(info.data[count][4] === "week") {
+                              optionBody = "<option value='0'>Once</option>" +
+                                           "<option value='day'>Day</option>" +
+                                           "<option value='week' selected>Week</option>";
+                            }
+                            html = html + "<tr><td style='text-align:center'>" +
+                                info.data[count][1] +
+                                "</td><td style='text-align:center'>" +
+                                "<input type='date' id='date_" + info.data[count][0]  + "' value='" + addZero(new Date(info.data[count][3]).getMonth()+1) + "/" + addZero(new Date(info.data[count][3]).getDate()) + "/" + new Date(info.data[count][3]).getFullYear() + "'/>" +
+                                "</td><td style='text-align:center'>" +
+                                "<input type='time' id='time_" + info.data[count][0]  + "' value='"+ addZero(new Date(info.data[count][3]).getHours()) +":" + addZero(new Date(info.data[count][3]).getMinutes()) +"'/>" +
+                                "</td><td style='text-align:center'><select id='repeat_add_rem_" + info.data[count][0] + "'>" +
+                                optionBody +
+                                "</select></td><td style='text-align:center; vertical-align:middle;'>" +
+                                "<input type='checkbox' id='chk_" + info.data[count][0] + "'/>" +
+                                "</td></tr>";
                           }
-                          html = html + "<tr id=" + info.data[count][0] + "><td style='text-align:center'>" +
-                              "<input type='text' id='title_" + info.data[count][0]  + "' placeholder='"+ info.data[count][1] +"' />" +
-                              "</td><td style='text-align:center'>" +
-                              "<input type='text' id='message_" + info.data[count][0]  + "' placeholder='"+ info.data[count][2] +"' />" +
-                              "</td><td style='text-align:center'>" +
-                              "<input type='date' id='date_" + info.data[count][0]  + "' placeholder='" + addZero(new Date(info.data[count][3]).getMonth()+1) + "/" + addZero(new Date(info.data[count][3]).getDate()) + "'/>" +
-                              "</td><td style='text-align:center'>" +
-                              "<input type='time' id='time_" + info.data[count][0]  + "' placeholder='"+ addZero(new Date(info.data[count][3]).getHours()) +":" + new Date(info.data[count][3]).getMinutes() +"'/>" +
-                              "</td><td style='text-align:center'><select id='repeat_add_rem_" + info.data[count][0] + "'>" +
-                              optionBody +
-                              "</select></td></tr>";
                         }
                         $("table#editTable tbody").empty();
                         $("table#editTable tbody").append(html).closest("table#editTable").table("refresh").trigger("create");
@@ -298,7 +352,7 @@ var app = {
                         });
                         setTimeout(function() {
                             $('#edit-reminders').css({
-                                'width': page_width * 0.8
+                                'width': page_width * 0.95
                             });
                             $('#edit-reminders').popup('open', {
                                 transition: "fade"
@@ -318,21 +372,15 @@ var app = {
                     }
                 });
             });
+            $('#back-to-plan').on('click', function() {
+              // refresh calendar
+              updateCalendar();
+            });
         });
-
-        // logic for reminder actions
-        if (!localStorage.getItem("rp_data")) {
-            var rp_data = {
-                data: []
-            };
-            localStorage.setItem("rp_data", JSON.stringify(rp_data));
-        }
-
-        info = JSON.parse(localStorage.getItem("rp_data"));
-
     }
 };
 
+// logic for reminder actions
 function schedule(id, title, message, schedule_time, repeat) {
     cordova.plugins.notification.local.schedule({
         id: id,
@@ -342,7 +390,7 @@ function schedule(id, title, message, schedule_time, repeat) {
         every: repeat
     });
 
-    var array = [id, title, message, schedule_time, repeat];
+    var array = [id, title, message, schedule_time, repeat, false];
     info.data[info.data.length] = array;
     localStorage.setItem("rp_data", JSON.stringify(info));
 
@@ -350,16 +398,16 @@ function schedule(id, title, message, schedule_time, repeat) {
     $('#back-to-rem2').click();
 }
 
-function edit(id, repeatTime) {
+function edit(id, schedule_time, repeat, is_delete) {
     cordova.plugins.notification.local.update({
         id: id,
-        every: repeatTime
+        at: schedule_time,
+        every: repeat
     });
-
-    info.data[id][4] = repeatTime;
+    info.data[id][3] = schedule_time;
+    info.data[id][4] = repeat;
+    info.data[id][5] = is_delete;
     localStorage.setItem("rp_data", JSON.stringify(info));
-
-    navigator.notification.alert("Reminder edited successfully");
 }
 
 function add_reminder() {
@@ -395,29 +443,89 @@ function add_reminder() {
 }
 
 function edit_reminder() {
-    var rem_id = document.getElementById("rem_id").value;
-    var repeatTime = document.getElementById("repeatTime").value;
+    for (var count = 0; count < info.data.length; count++) {
+      if(info.data[count][5]) {
+        continue;
+      }
+      var rem_id = info.data[count][0];
+      var date = document.getElementById("date_"+info.data[count][0]).value;
+      var time = document.getElementById("time_"+info.data[count][0]).value;
+      var repeat = document.getElementById("repeat_add_rem_"+info.data[count][0]).value;
+      var is_delete = document.getElementById("chk_"+info.data[count][0]).checked;
+      var schedule_time = new Date((date + " " + time).replace(/-/g, "/")).getTime();
+      schedule_time = new Date(schedule_time);
 
-    if (repeatTime === "") {
-        navigator.notification.alert("Please select repeat time");
-        return;
+      if (date === "" || time === "") {
+          navigator.notification.alert("Please enter all details");
+          return;
+      }
+
+      if(!info.data[count][5]) {
+        cordova.plugins.notification.local.hasPermission(function(granted) {
+            if (granted === true) {
+                edit(rem_id, schedule_time, repeat, is_delete);
+            } else {
+                cordova.plugins.notification.local.registerPermission(function(granted) {
+                    if (granted === true) {
+                      edit(rem_id, schedule_time, repeat, is_delete);
+                    } else {
+                        navigator.notification.alert("Reminder cannot be added because app doesn't have permission");
+                    }
+                });
+            }
+        });
+      }
     }
-
-    cordova.plugins.notification.local.hasPermission(function(granted) {
-        if (granted === true) {
-            edit(rem_id, repeatTime);
-        } else {
-            cordova.plugins.notification.local.registerPermission(function(granted) {
-                if (granted === true) {
-                    edit(rem_id, repeatTime);
-                } else {
-                    navigator.notification.alert("Reminder cannot be added because app doesn't have permission");
-                }
-            });
-        }
-    });
+    navigator.notification.alert("Reminder edited successfully");
+    $('#back-to-rem3').click();
 }
 
+function updateCalendar() {
+  codropsEvents = {};
+  transEndEventNames = {};
+  for (var count = 0; count < info.data.length; count++) {
+    if(info.data[count][5]) {
+      continue;
+    }
+    var nDate = new Date(info.data[count][3]);
+    var date_format = addZero(nDate.getMonth()+1) + "-" + addZero(nDate.getDate()) + "-" + nDate.getFullYear();
+    var date_content = info.data[count][1];
+    if(codropsEvents.hasOwnProperty(date_format)) {
+      codropsEvents[date_format] += '<span>'+ date_content +'</span>';
+    }else {
+      codropsEvents[date_format] = '<span>'+ date_content +'</span>';
+    }
+  }
+  transEndEventNames = {
+          'WebkitTransition': 'webkitTransitionEnd',
+          'MozTransition': 'transitionend',
+          'OTransition': 'oTransitionEnd',
+          'msTransition': 'MSTransitionEnd',
+          'transition': 'transitionend'
+      },
+      transEndEventName = transEndEventNames[Modernizr.prefixed('transition')],
+      $wrapper = $('#custom-inner'),
+      $calendar = $('#calendar'),
+      cal = $calendar.calendario({
+          onDayClick: function($el, $contentEl, dateProperties) {
+              if ($contentEl.length > 0) {
+                  showEvents($contentEl, dateProperties);
+              }
+          },
+          caldata: codropsEvents,
+          displayWeekAbbr: true
+      }),
+      $month = $('#custom-month').html(cal.getMonthName()),
+      $year = $('#custom-year').html(cal.getYear());
+  $('#custom-next').on('click', function() {
+      cal.gotoNextMonth(updateMonthYear);
+  });
+  $('#custom-prev').on('click', function() {
+      cal.gotoPreviousMonth(updateMonthYear);
+  });
+}
+
+// add zero before time and month
 function addZero(i) {
     if (i < 10) {
         i = "0" + i;
