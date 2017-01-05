@@ -44,7 +44,13 @@ var app = {
                 } // called in case you pass in weird values
             );
 
-            // data for calendar
+            // clear data and notifications
+            // localStorage.removeItem("rp_data");
+            // cordova.plugins.notification.local.cancelAll(function() {
+            //     alert("cleaning done");
+            // }, this);
+
+            // save data for calendar
             if (!localStorage.getItem("rp_data")) {
                 var rp_data = {
                     data: []
@@ -131,6 +137,54 @@ var app = {
               } else {
                 codropsEvents[date_format] = '<span>'+ date_content +'</span>';
               }
+
+              // show repeat on calendar
+              var repeatTimes = info.data[count][4];
+              var curMonth = nDate.getMonth()+1;
+              var curYear = nDate.getFullYear();
+              var curDay = nDate.getDate();
+              if(repeatTimes === "day") {
+                for(var ctMonths = 1; ctMonths <= 3; ctMonths++) {
+                  var day = findDays(curMonth);
+                  while(curDay <= day-1) {
+                    date_format = addZero(curMonth) + "-" + addZero(curDay+1) + "-" + curYear;
+                    if(codropsEvents.hasOwnProperty(date_format)) {
+                      codropsEvents[date_format] += '<span>'+ date_content +'</span>';
+                    } else {
+                      codropsEvents[date_format] = '<span>'+ date_content +'</span>';
+                    }
+                    curDay += 1;
+                  }
+                  if(curMonth==12) {
+                    curYear += 1;
+                    curMonth = 1;
+                    curDay = 0;
+                  }else{
+                    curMonth += 1;
+                    curDay = 0;
+                  }
+                }
+              }else if(repeatTimes === "week") {
+                for(var ctMonths2 = 1; ctMonths2 <= 3; ctMonths2++) {
+                  var day2 = findDays(curMonth);
+                  while(curDay <= day2 - 7) {
+                    date_format = addZero(curMonth) + "-" + addZero(curDay+7) + "-" + curYear;
+                    if(codropsEvents.hasOwnProperty(date_format)) {
+                      codropsEvents[date_format] += '<span>'+ date_content +'</span>';
+                    } else {
+                      codropsEvents[date_format] = '<span>'+ date_content +'</span>';
+                    }
+                    curDay += 7;
+                  }
+                  curDay = curDay - day2 - 7;
+                  if(curMonth==12) {
+                    curYear += 1;
+                    curMonth = 1;
+                  }else{
+                    curMonth += 1;
+                  }
+                }
+              }
             }
             transEndEventNames = {
                     'WebkitTransition': 'webkitTransitionEnd',
@@ -159,6 +213,8 @@ var app = {
             $('#custom-prev').on('click', function() {
                 cal.gotoPreviousMonth(updateMonthYear);
             });
+
+            // original
             // var codropsEvents = {
             //     '12-24-2016': '<span>Christmas Eve</span>',
             //     '12-25-2016': '<span>Christmas Day</span>',
@@ -226,6 +282,9 @@ var app = {
             var chHeight = $('.custom-header').outerHeight();
             var caHeight = $('#calendar').outerHeight();
             $('#plan-content').height(tHeight - chHeight - caHeight - hHeight - fHeight - fTopBorder * 2.0 - 40.0);
+
+            // show today content
+            showTodayContent();
 
             // chain popups for reminders
             var page_width = window.innerWidth;
@@ -475,6 +534,11 @@ function edit_reminder() {
             }
         });
       }
+      if(is_delete) {
+        cordova.plugins.notification.local.cancel(info.data[count][0], function() {
+            alert("Deleted Chosen Reminder");
+        });
+      }
     }
     navigator.notification.alert("Reminder edited successfully");
     $('#back-to-rem3').click();
@@ -495,6 +559,55 @@ function updateCalendar() {
     }else {
       codropsEvents[date_format] = '<span>'+ date_content +'</span>';
     }
+
+    // show repeat on calendar
+    var repeatTimes = info.data[count][4];
+    var curMonth = nDate.getMonth()+1;
+    var curYear = nDate.getFullYear();
+    var curDay = nDate.getDate();
+    if(repeatTimes === "day") {
+      for(var ctMonths = 1; ctMonths <= 3; ctMonths++) {
+        var day = findDays(curMonth);
+        while(curDay <= day-1) {
+          date_format = addZero(curMonth) + "-" + addZero(curDay+1) + "-" + curYear;
+          if(codropsEvents.hasOwnProperty(date_format)) {
+            codropsEvents[date_format] += '<span>'+ date_content +'</span>';
+          } else {
+            codropsEvents[date_format] = '<span>'+ date_content +'</span>';
+          }
+          curDay += 1;
+        }
+        if(curMonth==12) {
+          curYear += 1;
+          curMonth = 1;
+          curDay = 0;
+        }else{
+          curMonth += 1;
+          curDay = 0;
+        }
+      }
+    }else if(repeatTimes === "week") {
+      for(var ctMonths2 = 1; ctMonths2 <= 3; ctMonths2++) {
+        var day2 = findDays(curMonth);
+        while(curDay <= day2 - 7) {
+          date_format = addZero(curMonth) + "-" + addZero(curDay+7) + "-" + curYear;
+          if(codropsEvents.hasOwnProperty(date_format)) {
+            codropsEvents[date_format] += '<span>'+ date_content +'</span>';
+          } else {
+            codropsEvents[date_format] = '<span>'+ date_content +'</span>';
+          }
+          curDay += 7;
+        }
+        curDay = curDay - day2 - 7;
+        if(curMonth==12) {
+          curYear += 1;
+          curMonth = 1;
+        }else{
+          curMonth += 1;
+        }
+      }
+    }
+
   }
   transEndEventNames = {
           'WebkitTransition': 'webkitTransitionEnd',
@@ -523,6 +636,27 @@ function updateCalendar() {
   $('#custom-prev').on('click', function() {
       cal.gotoPreviousMonth(updateMonthYear);
   });
+  showTodayContent();
+}
+
+// Show Today Content
+function showTodayContent() {
+  var today = new Date();
+  var today_year = today.getFullYear();
+  var today_month = today.getMonth()+1;
+  var today_date = today.getDate();
+  var today_format = addZero(today_month) + "-" + addZero(today_date) + "-" + today_year;
+  var html_li = "";
+  if (codropsEvents.hasOwnProperty(today_format)) {
+    var li_content = codropsEvents[today_format].replace(/<span>/g, "").split("</span>");
+    for(var i=0; i<li_content.length; i++) {
+      html_li += "<li>" + li_content[i] + "</li>";
+    }
+    // navigator.notification.alert(li_content.length);
+  }else {
+    html_li = "None. Enjoy your day!";
+  }
+  $("#plan-content ul").html(html_li);
 }
 
 // add zero before time and month
@@ -531,4 +665,47 @@ function addZero(i) {
         i = "0" + i;
     }
     return i;
+}
+
+function findDays(month) {
+  var day = 0;
+  switch (month) {
+    case 1:
+        day = 31;
+        break;
+    case 2:
+        day = 28;
+        break;
+    case 3:
+        day = 31;
+        break;
+    case 4:
+        day = 30;
+        break;
+    case 5:
+        day = 31;
+        break;
+    case 6:
+        day = 30;
+        break;
+    case 7:
+        day = 31;
+        break;
+    case 8:
+        day = 31;
+        break;
+    case 9:
+        day = 30;
+        break;
+    case 10:
+        day = 31;
+        break;
+    case 11:
+        day = 30;
+        break;
+    case 12:
+        day = 31;
+        break;
+  }
+  return day;
 }
