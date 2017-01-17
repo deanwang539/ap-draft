@@ -82,6 +82,48 @@ var app = {
                 }
             });
 
+            // add des for menu-click
+            $("#exp-menu input").click(function() {
+                if ($("#exp-menu input").is(':checked')) {
+                    var pChart = $('#aChart').offset();
+                    var pTop = pChart.top;
+                    var pLeft = pChart.left - $('#aChart').width();
+                    $('#dChart').append('Chart');
+                    $('#dChart').css({
+                        "position": "absolute",
+                        'top': pTop - $('#aChart').height() * 1.15,
+                        'left': pLeft
+                    });
+                    $('#dPlus').append('Plus');
+                    $('#dPlus').css({
+                        "position": "absolute",
+                        'top': pTop - $('#aChart').height() * 2.55,
+                        'left': pLeft
+                    });
+                    $('#dHeart').append('Heart');
+                    $('#dHeart').css({
+                        "position": "absolute",
+                        'top': pTop - $('#aChart').height() * 3.95,
+                        'left': pLeft
+                    });
+                    $('#dEnvelope').append('Enve');
+                    $('#dEnvelope').css({
+                        "position": "absolute",
+                        'top': pTop - $('#aChart').height() * 5.35,
+                        'left': pLeft
+                    });
+                    $(".title-item").fadeIn(500);
+                    $(".menu-clicked").show();
+                } else {
+                    $('#dChart').html("");
+                    $('#dPlus').html("");
+                    $('#dHeart').html("");
+                    $('#dEnvelope').html("");
+                    $(".title-item").hide();
+                    $(".menu-clicked").hide();
+                }
+            });
+
             // create calendar
             for (var count = 0; count < info.data.length; count++) {
               if(info.data[count][5]) {
@@ -171,6 +213,40 @@ var app = {
             $('#custom-prev').on('click', function() {
                 cal.gotoPreviousMonth(updateMonthYear);
             });
+
+            // original
+            // var codropsEvents = {
+            //     '12-24-2016': '<span>Christmas Eve</span>',
+            //     '12-25-2016': '<span>Christmas Day</span>',
+            // };
+            // var transEndEventNames = {
+            //         'WebkitTransition': 'webkitTransitionEnd',
+            //         'MozTransition': 'transitionend',
+            //         'OTransition': 'oTransitionEnd',
+            //         'msTransition': 'MSTransitionEnd',
+            //         'transition': 'transitionend'
+            //     },
+            //     transEndEventName = transEndEventNames[Modernizr.prefixed('transition')],
+            //     $wrapper = $('#custom-inner'),
+            //     $calendar = $('#calendar'),
+            //     cal = $calendar.calendario({
+            //         onDayClick: function($el, $contentEl, dateProperties) {
+            //             if ($contentEl.length > 0) {
+            //                 showEvents($contentEl, dateProperties);
+            //             }
+            //         },
+            //         caldata: codropsEvents,
+            //         displayWeekAbbr: true
+            //     }),
+            //     $month = $('#custom-month').html(cal.getMonthName()),
+            //     $year = $('#custom-year').html(cal.getYear());
+            //
+            // $('#custom-next').on('click', function() {
+            //     cal.gotoNextMonth(updateMonthYear);
+            // });
+            // $('#custom-prev').on('click', function() {
+            //     cal.gotoPreviousMonth(updateMonthYear);
+            // });
 
             function updateMonthYear() {
                 $month.html(cal.getMonthName());
@@ -582,6 +658,7 @@ function showTodayContent() {
     for(var i=0; i<li_content.length; i++) {
       html_li += "<li>" + li_content[i] + "</li>";
     }
+    // navigator.notification.alert(li_content.length);
   }else {
     html_li = "None. Enjoy your day!";
   }

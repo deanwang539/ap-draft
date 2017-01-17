@@ -30,43 +30,8 @@
             <div data-role="header">
               <h1>Acupressure</h1>
             </div>
-            <div class="ap-menu-clicked">
-              <div data-role="main" class="ui-content">
-                <ul id="ap-menu-list" data-role="listview" data-inset="true">
-                  <li>
-                    <a href="#">
-                    <img src="../../images/profile_default.png">
-                    <h2>Google Chrome</h2>
-                    <p>Google Chrome is a web browser.</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                    <img src="../../images/profile_default.png">
-                    <h2>Mozilla Firefox</h2>
-                    <p>Firefox is a web browser.</p>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
             <div id="ap-content">
               <div id="ap-bg"></div>
-            </div>
-            <div id="ap-exp-menu">
-              <nav class="ap-menu">
-                <input data-role="none" type="checkbox" href="#" class="ap-menu-open" name="ap-menu-open" id="ap-menu-open"/>
-                <label class="ap-menu-open-button" for="ap-menu-open">
-                  <!-- <span class="hamburger hamburger-1"></span>
-                  <span class="hamburger hamburger-2"></span>
-                  <span class="hamburger hamburger-3"></span> -->
-                  <span class="ap-hamburger"></span>
-                </label>
-                <!-- <a href="#" class="ap-menu-item"> <i class="fa fa-bar-chart"></i> </a>
-                <a href="#" class="ap-menu-item"> <i class="fa fa-plus"></i> </a>
-                <a href="#" class="ap-menu-item"> <i class="fa fa-heart"></i> </a>
-                <a href="#" class="ap-menu-item"> <i class="fa fa-envelope"></i> </a> -->
-              </nav>
             </div>
             <div class="footer" data-role="footer">
             	<div data-role="navbar">
@@ -126,7 +91,7 @@
                             <button class="btn-no-shadow">Edit Reminders</button>
                           </a>
                         </div>
-                        <a href="#plan" style="text-decoration: none; display: inline-block">
+                        <a href="#plan" id="back-to-plan" style="text-decoration: none; display: inline-block">
                           <button class="btn-no-shadow">Done</button>
                         </a>
                       </div>
@@ -163,11 +128,17 @@
                             Enter title and message for the reminder:
                             <input type="text" id="title" placeholder="Title" />
                             <input type="text" id="message" placeholder="Message" />
+                            <select id="repeat_add_rem">
+                              <option value="" disabled selected>Repeat</option>
+                              <option value="0">Once</option>
+                              <option value="day">Day</option>
+                              <option value="week">Week</option>
+                            </select>
                             Enter date and time to trigger reminder:
                             <input type="date" id="date" />
                             <input type="time" id="time" />
                             <div class="text-center">
-                              <a href="#" style="text-decoration: none; display: inline-block"><button class="btn-no-shadow">Add</button></a>
+                              <a href="javascript:add_reminder()" style="text-decoration: none; display: inline-block"><button class="btn-no-shadow">Add</button></a>
                             </div>
                         </p>
                       </div>
@@ -183,6 +154,8 @@
                           <thead>
                             <tr>
                               <th style="text-align:center">Title</th>
+                              <th style="text-align:center">Date</th>
+                              <th style="text-align:center">Time</th>
                               <th style="text-align:center">Repeat</th>
                               <th style="text-align:center">Delete</th>
                             </tr>
@@ -191,7 +164,7 @@
                           </tbody>
                         </table>
                         <div class="text-center">
-                          <a href="#" style="text-decoration: none; display: inline-block"><button>Save</button></a>
+                          <a href="javascript:edit_reminder()" style="text-decoration: none; display: inline-block"><button>Save</button></a>
                         </div>
                       </div>
                     </div>
@@ -215,11 +188,39 @@
         <!-- start of warmup -->
         <div id="warmup" class="container" data-role="page">
           <div class="content">
-            <div class="menu-clicked"></div>
+            <!-- <div class="menu-clicked"></div> -->
             <div data-role="header">
               <h1>Warmup</h1>
             </div>
-            <div id="exp-menu">
+            <div class="ap-menu-clicked">
+              <div data-role="main" class="ui-content">
+                <ul id="ap-menu-list" data-role="listview" data-inset="true">
+                  <li>
+                    <a href="#">
+                    <img src="../../images/profile_default.png">
+                    <h2>Google Chrome</h2>
+                    <p>Google Chrome is a web browser.</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                    <img src="../../images/profile_default.png">
+                    <h2>Mozilla Firefox</h2>
+                    <p>Firefox is a web browser.</p>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div id="ap-exp-menu">
+              <nav class="ap-menu">
+                <input data-role="none" type="checkbox" href="#" class="ap-menu-open" name="ap-menu-open" id="ap-menu-open"/>
+                <label class="ap-menu-open-button" for="ap-menu-open">
+                  <span class="ap-hamburger"></span>
+                </label>
+              </nav>
+            </div>
+            <!-- <div id="exp-menu">
               <nav class="menu">
                 <input data-role="none" type="checkbox" href="#" class="menu-open" name="menu-open" id="menu-open"/>
                 <label class="menu-open-button" for="menu-open">
@@ -236,7 +237,7 @@
               <div id="dPlus" class="title-item"></div>
               <div id="dHeart" class="title-item"></div>
               <div id="dEnvelope" class="title-item"></div>
-            </div>
+            </div> -->
             <div class="footer" data-role="footer">
               <div data-role="navbar">
                 <ul>

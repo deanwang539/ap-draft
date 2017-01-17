@@ -81,8 +81,8 @@
     color: white;
     text-align: center;
     line-height: 50px;
-    transform: translate3d(0, 0, 0);
-    transition: transform ease-out 200ms;
+    -webkit-transform: translate3d(0, 0, 0);
+    transition: -webkit-transform ease-out 200ms;
 }
 .ap-menu-open {
     display: none;
@@ -92,14 +92,14 @@
     height: 100%;
     position: absolute;
     display: block;
-    transition: transform 200ms;
-    background-image: url("../../images/ACP_videoplay.png");
+    transition: -webkit-transform 200ms;
+    background-image: url("../../images/button_video.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
 }
 .ap-menu-open:checked+.ap-menu-open-button .ap-hamburger {
-    transform: translate3d(0, 0, 0) scale(0.9, 0.9);
+    -webkit-transform: translate3d(0, 0, 0) scale(0.9, 0.9);
 }
 .ap-menu {
     position: absolute;
@@ -131,33 +131,33 @@
     z-index: 2;
     transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
     transition-duration: 400ms;
-    transform: scale(1.1, 1.1) translate3d(0, 0, 0);
+    -webkit-transform: scale(1.1, 1.1) translate3d(0, 0, 0);
     cursor: pointer;
 }
 .ap-menu-open-button:hover {
-    transform: scale(1.2, 1.2) translate3d(0, 0, 0);
+    -webkit-transform: scale(1.2, 1.2) translate3d(0, 0, 0);
 }
 .ap-menu-open:checked+.ap-menu-open-button {
     transition-timing-function: linear;
     transition-duration: 200ms;
-    transform: scale(0.8, 0.8) translate3d(0, 0, 0);
+    -webkit-transform: scale(0.8, 0.8) translate3d(0, 0, 0);
 }
 .ap-menu-open:checked~.ap-menu-item {
     transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 .ap-menu-open:checked~.ap-menu-item:nth-child(3) {
     transition-duration: 190ms;
-    transform: translate3d(0, -70px, 0);
+    -webkit-transform: translate3d(0, -70px, 0);
 }
 .ap-menu-open:checked~.ap-menu-item:nth-child(4) {
     transition-duration: 290ms;
-    transform: translate3d(0, -140px, 0);
+    -webkit-transform: translate3d(0, -140px, 0);
 }
 .ap-menu-open:checked~.ap-menu-item:nth-child(5) {
     transition-duration: 390ms;
-    transform: translate3d(0, -210px, 0);
+    -webkit-transform: translate3d(0, -210px, 0);
 }
 .ap-menu-open:checked~.ap-menu-item:nth-child(6) {
     transition-duration: 490ms;
-    transform: translate3d(0, -280px, 0);
+    -webkit-transform: translate3d(0, -280px, 0);
 }
