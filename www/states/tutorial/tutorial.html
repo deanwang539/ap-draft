@@ -17,37 +17,43 @@
           <div class="content">
             <div id="owl-content" class="owl-carousel">
               <div class="page-center">
-                <p>
-                Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
-                ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
-                amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
-                odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+                <img class="tutorial_ph" src="../../images/tutorial_ph.png" alt="tutorial_ph"></img>
+                <p class="page-content">
+                  Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+                  ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+                  amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+                  odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
                 </p>
               </div>
-              <div class="page-center">Your Content</div>
               <div class="page-center">
-                <p>
-                Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
-                ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
-                amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
-                odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+                <img class="tutorial_ph" src="../../images/tutorial_ph.png" alt="tutorial_ph"></img>
+                <p class="page-content">
+                  Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+                  ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+                  amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+                  odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
                 </p>
-                <div class="text-center">
-                  <a id="watch_video"class="tutorial-btn" href="#">Watch Video</a>
-                  <!-- <a id="continue" class="tutorial-btn" href="#">Continue</a> -->
+              </div>
+              <div class="page-center">
+                <div>
+                  <figure>
+                    <a id="watch_video" class="tutorial-btn" href="#">
+                      <img id="watch_video_btn" class="btn_ph" src="../../images/button_video.png" alt="button_video">
+                    </a>
+                    <figcaption class="text-center">watch tutorial video</figcaption>
+                  </figure>
+                  <img class="divider_ph" src="../../images/divider_bar.png" alt="divider_bar">
+                  <figure>
+                    <a id="continue" class="tutorial-btn" href="#">
+                      <img id="continue_btn" class="btn_ph" src="../../images/button_ph.png" alt="button_ph">
+                    </a>
+                    <figcaption class="text-center">continue to app</figcaption>
+                  </figure>
                 </div>
-              </div>
-              <div class="page-center">
-                <p>
-                Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
-                ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
-                amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
-                odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
-                </p>
-                <div class="text-center">
-                  <!-- <a id="watch_video"class="tutorial-btn" href="#">Watch Video</a> -->
+                <!-- <div class="text-center">
+                  <a id="watch_video" class="tutorial-btn" href="#">Watch Video</a>
                   <a id="continue" class="tutorial-btn" href="#">Continue</a>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -59,6 +65,15 @@
         <script type="text/javascript" src="tutorial.js"></script>
         <script type="text/javascript">
             app.initialize();
+            // for web debug
+            // $("#owl-content").owlCarousel({
+            //   singleItem:true,
+            //   items: 1
+            // });
+            // var contentH = $(".content").height();
+            // var owlPageH = $(".owl-theme .owl-controls").height();
+            // $(".owl-carousel .owl-wrapper-outer").height(contentH - owlPageH*2);
+            // $(".owl-carousel .owl-wrapper").height(contentH - owlPageH*2);
         </script>
     </body>
 </html>

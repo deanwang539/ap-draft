@@ -3,12 +3,26 @@
   top: 0;
   width: 100%;
   height: 100%;
+  /* font size for tutorial page */
+  font-size: 25px;
+}
+
+.page-center{
+  padding: 15% 5% 50% 5%;
+}
+
+.page-content {
+  text-align: justify;
+  padding: 7% 7%;
+  background-color: #f4f6f5;
+  border: 2px solid #a1a1a1;
+  border: 0px;
+  border-radius: 25px;
 }
 
 .tutorial-btn {
-  display: block;
+  /*display: block;
   text-align: center;
-  /*width: 15%;*/
   border-style: solid;
   border-color: gray;
   border-radius: 15px;
@@ -16,17 +30,41 @@
   color: black;
   font-size: 20px;
   margin: 10% auto;
-  padding: 10px;
+  padding: 10px;*/
   text-decoration: none;
-  /*important removing tab color*/
   -webkit-tap-highlight-color: transparent;
 }
 
-.tutorial-btn:focus {
+/*.tutorial-btn:focus {
   color: lightgreen;
   border-color: lightgreen;
+  -webkit-transform: scale(0.9, 0.9) translate3d(0, 0, 0);
+}*/
+
+.tutorial_ph {
+  width: 50%;
+  height: 50%;
+  display: block;
+  margin: 0 auto;
 }
 
-/*.owl-carousel .owl-wrapper-outer {
-  height: 600px;
-}*/
+.btn_ph {
+  width: 50%;
+  height: 50%;
+  display: block;
+  margin: 0 auto;
+}
+
+#watch_video:active img{
+  transition-timing-function: linear;
+  transition-duration: 200ms;
+  -webkit-transform: scale(0.9, 0.9) translate3d(0, 0, 0);
+  opacity: 0.8;
+}
+
+.divider_ph {
+  width: 100%;
+  height: 100%;
+  display: block;
+  margin: 10% auto;
+}

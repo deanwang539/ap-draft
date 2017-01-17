@@ -8,7 +8,7 @@
     position: relative;
 }
 #ap-bg {
-    background-image: url("../../images/ACP_body.png");
+    background-image: url("../../images/overall_layout.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -147,9 +147,6 @@
 .ap-menu-open:checked+.ap-menu-open-button {
     transition-timing-function: linear;
     transition-duration: 200ms;
-    /*-webkit-transform: scale(0.9, 0.9) translate3d(0, 0, 0);*/
-
-    /*for tablet*/
     -webkit-transform: scale(0.9, 0.9) translate3d(0, 0, 0);
 }
 .ap-menu-open:checked~.ap-menu-item {
