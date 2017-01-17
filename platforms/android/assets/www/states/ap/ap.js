@@ -482,6 +482,9 @@ function add_reminder() {
     }
 
     var schedule_time = new Date((date + " " + time).replace(/-/g, "/")).getTime();
+    // clear ms and seconds to 0
+    schedule_time -= schedule_time % 1000;
+    schedule_time -= schedule_time % 60000;
     schedule_time = new Date(schedule_time);
 
     var id = info.data.length;
@@ -512,6 +515,9 @@ function edit_reminder() {
       var repeat = document.getElementById("repeat_add_rem_"+info.data[count][0]).value;
       var is_delete = document.getElementById("chk_"+info.data[count][0]).checked;
       var schedule_time = new Date((date + " " + time).replace(/-/g, "/")).getTime();
+      // clear ms and seconds to 0
+      schedule_time -= schedule_time % 1000;
+      schedule_time -= schedule_time % 60000;
       schedule_time = new Date(schedule_time);
 
       if (date === "" || time === "") {
@@ -567,7 +573,7 @@ function updateCalendar() {
     var curDay = nDate.getDate();
     if(repeatTimes === "day") {
       for(var ctMonths = 1; ctMonths <= 3; ctMonths++) {
-        var day = findDays(curMonth);
+        var day = findDays(curMonth, curYear);
         while(curDay <= day-1) {
           date_format = addZero(curMonth) + "-" + addZero(curDay+1) + "-" + curYear;
           if(codropsEvents.hasOwnProperty(date_format)) {
@@ -588,7 +594,7 @@ function updateCalendar() {
       }
     }else if(repeatTimes === "week") {
       for(var ctMonths2 = 1; ctMonths2 <= 3; ctMonths2++) {
-        var day2 = findDays(curMonth);
+        var day2 = findDays(curMonth, curYear);
         while(curDay <= day2 - 7) {
           date_format = addZero(curMonth) + "-" + addZero(curDay+7) + "-" + curYear;
           if(codropsEvents.hasOwnProperty(date_format)) {
@@ -667,14 +673,18 @@ function addZero(i) {
     return i;
 }
 
-function findDays(month) {
+function findDays(month, year) {
   var day = 0;
   switch (month) {
     case 1:
         day = 31;
         break;
     case 2:
-        day = 28;
+        if(isLeap(year)) {
+          day = 29;
+        }else {
+          day = 28;
+        }
         break;
     case 3:
         day = 31;
@@ -708,4 +718,8 @@ function findDays(month) {
         break;
   }
   return day;
+}
+
+function isLeap(year) {
+  return ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0);
 }
